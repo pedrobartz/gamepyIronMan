@@ -18,9 +18,15 @@ movimentoYpersona = 0
 posicaoXMissel = 400
 posicaoYMissel = -300
 velocidadeMissel = 2
-
+pontos = 0
+larguraPersona = 250
+alturaPersona = 127 
+larguraMissel= 50
+alturaMissel = 250
+dificuldade = 10
 
 fonte = pygame.font.SysFont("comicsans",14)
+fontemorte = pygame.font.SysFont('arial', 20)
 
 misselsound= pygame.mixer.Sound("assets/missile.wav")
 pygame.mixer.Sound.play(misselsound)
@@ -69,6 +75,7 @@ while True:
     posicaoYMissel = posicaoYMissel +velocidadeMissel
     if posicaoYMissel > 600:
         posicaoYMissel = -200
+        pontos = pontos =pontos +1
         velocidadeMissel =velocidadeMissel+1
         posicaoXMissel = random.randint(0,800)
         pygame.mixer.Sound.play(misselsound)
@@ -79,9 +86,28 @@ while True:
     tela.blit(fundo,(0,0))
     tela.blit (missel, (posicaoXMissel,posicaoYMissel))
     tela.blit(iron, (posicaoXPersona, posicaoYPersona))
+    pontosmostrar = fonte.render(('pontos: ')+str(pontos),True,branco)
+    tela.blit(pontosmostrar, (10,10))
+    texto = fonte.render(str(posicaoXPersona)+"-"+str(posicaoYPersona), True, preto)
+    tela.blit(texto, (posicaoXPersona+95,posicaoYPersona-15))
 
-    texto = fonte.render(str(posicaoXPersona)+"-"+str(posicaoYPersona), True, branco)
-    tela.blit(texto, (posicaoXPersona-30,posicaoYPersona-10))
-    
+
+    pixelsPersonaX = list(range(posicaoXPersona, posicaoXPersona+larguraPersona))
+    pixelsPersonaY = list(range(posicaoYPersona,posicaoYPersona+alturaPersona))
+
+    pixelsMisselX = list(range(posicaoXMissel, posicaoXMissel+larguraMissel))
+    pixelsMisselY = list(range(posicaoYMissel, posicaoYMissel+alturaMissel))
+
+    if len (list(set(pixelsMisselY).intersection(set(pixelsPersonaY)))) > dificuldade:
+        if len (list(set(pixelsMisselX).intersection(set(pixelsPersonaX)))) > dificuldade:
+            textomorte = fontemorte.render(("MORREU"),True,preto)
+            tela.blit(textomorte,(200,200))
+             
+
+
+
+
+
+
     pygame.display.update()
     clock.tick(60)
