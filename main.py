@@ -11,6 +11,8 @@ preto = (0,0,0)
 iron = pygame.image.load("assets/iron.png")
 fundo = pygame.image.load("assets/fundo.png")
 missel = pygame.image.load("assets/missile.png")
+icone = pygame.image.load("assets/IronManLogo.png")
+pygame.display.set_icon(icone)
 posicaoXPersona = 400
 posicaoYPersona = 300
 movimentoXpersona = 0
@@ -40,18 +42,18 @@ while True:
             pygame.quit()
             exit()
         elif event.type == pygame.KEYDOWN and event.key == pygame.K_RIGHT:
-            movimentoXpersona = 3
+            movimentoXpersona = 6
         elif event.type == pygame.KEYDOWN and event.key == pygame.K_LEFT:
-            movimentoXpersona = -3
+            movimentoXpersona = -6
         elif event.type == pygame.KEYUP and event.key == pygame.K_RIGHT:
             movimentoXpersona = 0
         elif event.type == pygame.KEYUP and event.key == pygame.K_LEFT:
             movimentoXpersona = 0
         
         elif event.type == pygame.KEYDOWN and event.key == pygame.K_UP:
-            movimentoYpersona = -3
+            movimentoYpersona = -6
         elif event.type == pygame.KEYDOWN and event.key == pygame.K_DOWN:
-            movimentoYpersona = 3
+            movimentoYpersona = 6
         elif event.type == pygame.KEYUP and event.key == pygame.K_UP:
             movimentoYpersona = 0
         elif event.type == pygame.KEYUP and event.key == pygame.K_DOWN:
